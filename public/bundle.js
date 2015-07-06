@@ -23549,6 +23549,7 @@
 	var React = __webpack_require__(1),
 	    Main = __webpack_require__(197),
 	    Home = __webpack_require__(198),
+	    Profile = __webpack_require__(199),
 	    Router = __webpack_require__(157),
 	    DefaultRoute = Router.DefaultRoute,
 	    Route = Router.Route;
@@ -23556,6 +23557,7 @@
 	module.exports = React.createElement(
 	    Route,
 	    { name: 'app', path: '/', handler: Main },
+	    React.createElement(Route, { name: 'profile', path: 'profile/:username', handler: Profile }),
 	    React.createElement(DefaultRoute, { handler: Home })
 	);
 
@@ -23616,6 +23618,134 @@
 	});
 
 	module.exports = Home;
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1),
+	    Router = __webpack_require__(157),
+	    UserProfile = __webpack_require__(200),
+	    Repos = __webpack_require__(201),
+	    Notes = __webpack_require__(202);
+
+	var Profile = React.createClass({
+		displayName: 'Profile',
+
+		mixins: [Router.State],
+		getInitialState: function getInitialState() {
+			return {
+				notes: ['nota1', 'nota2'],
+				bio: { name: 'Juan M R' },
+				repos: [1, 2, 3]
+			};
+		},
+		render: function render() {
+			var username = this.getParams().username;
+			return React.createElement(
+				'div',
+				{ className: 'row' },
+				React.createElement(
+					'div',
+					{ className: 'col-md-4' },
+					React.createElement(UserProfile, { username: username, bio: this.state.bio })
+				),
+				React.createElement(
+					'div',
+					{ className: 'col-md-4' },
+					React.createElement(Repos, { username: username, repos: this.state.repos })
+				),
+				React.createElement(
+					'div',
+					{ className: 'col-md-4' },
+					React.createElement(Notes, { username: username, notes: this.state.notes })
+				)
+			);
+		}
+	});
+
+	module.exports = Profile;
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var UserProfiles = React.createClass({
+	    displayName: 'UserProfiles',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            'User Profile ',
+	            React.createElement('br', null),
+	            'Username: ',
+	            this.props.username,
+	            ' ',
+	            React.createElement('br', null),
+	            'Bio: ',
+	            this.props.bio
+	        );
+	    }
+
+	});
+
+	module.exports = UserProfiles;
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Repos = React.createClass({
+	    displayName: 'Repos',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            ' REPOSSSS'
+	        );
+	    }
+
+	});
+
+	module.exports = Repos;
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by jmrodriguez on 06/07/15.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Notes = React.createClass({
+	    displayName: 'Notes',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            ' Notes '
+	        );
+	    }
+
+	});
+
+	module.exports = Notes;
 
 /***/ }
 /******/ ]);
